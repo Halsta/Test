@@ -36,7 +36,7 @@ The second requirement is wallet private key and a password. We never save your 
 ```bash
 holograph config
 ```
-You should export your rpc or youse private
+You should export your rpc or use defolt one
 ### Export private keys
 Instruction:
 https://support.metamask.io/hc/en-us/articles/360015289632-How-to-export-an-account-s-private-key
