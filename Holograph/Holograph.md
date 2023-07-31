@@ -41,3 +41,16 @@ You should export your rpc or youse private
 Instruction:
 https://support.metamask.io/hc/en-us/articles/360015289632-How-to-export-an-account-s-private-key
 
+### Start client
+```bash
+holograph faucet
+```
+To get testnet HLG tokens, you must run the holograph faucet command. You are allowed to claim 100 HLG once every 24 hours per blockchain. If you want to operate on multiple blockchains, you will need to call this command on every network.
+
+### Bonding Into a Pod
+To become an operator, you must bond HLG into a pod. You are required to maintain uptime or risk having your HLG slashed
+
+```bash
+holograph operator:bond
+```
+
