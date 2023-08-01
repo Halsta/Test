@@ -5,7 +5,7 @@ sudo apt update && sudo apt upgrade -y
 ```
 ### Install git
 ```bash
-sudo apt install git 
+sudo apt install git screen
 ```
 
 ### Install Nodejs and npm
@@ -61,10 +61,19 @@ holograph faucet
 ```
 To get testnet HLG tokens, you must run the holograph faucet command. You are allowed to claim 100 HLG once every 24 hours per blockchain. If you want to operate on multiple blockchains, you will need to call this command on every network.
 
+### Start screen session
+
+```bash
+screen -S HLG
+```bash
+
 ### Bonding Into a Pod
 To become an operator, you must bond HLG into a pod. You are required to maintain uptime or risk having your HLG slashed
 
 ```bash
 holograph operator:bond
 ```
+### Detach from screen session
+
+ctrl^a +d
 
