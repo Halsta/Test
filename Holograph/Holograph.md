@@ -41,6 +41,9 @@ You should export your rpc or use defolt one
 Instruction:
 https://support.metamask.io/hc/en-us/articles/360015289632-How-to-export-an-account-s-private-key
 
+## Faucet 
+https://mumbaifaucet.com/
+
 ### Start client
 ```bash
 holograph faucet
