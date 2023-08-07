@@ -73,7 +73,7 @@ To become an operator, you must bond HLG into a pod. You are required to maintai
 ```bash
 holograph operator:bond
 ```
-### Detach from screen session
+### Detach from screen session.
 
 ctrl^a +d
 
