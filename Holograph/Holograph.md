@@ -55,13 +55,13 @@ Goerli:
 
 https://goerlifaucet.com/
 
-### Start client
+### Start client.
 ```bash
 holograph faucet
 ```
 To get testnet HLG tokens, you must run the holograph faucet command. You are allowed to claim 100 HLG once every 24 hours per blockchain. If you want to operate on multiple blockchains, you will need to call this command on every network.
 
-### Start screen session
+### Start screen session.
 
 ```bash
 screen -S HLG
