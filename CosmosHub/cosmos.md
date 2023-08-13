@@ -69,6 +69,13 @@ mv gaiad-v9.0.2-linux-amd64 /usr/local/bin/gaiad
 cd /usr/local/bin/
 chmod +x gaiad
 ```
+```bash
+cd $HOME
+wget https://github.com/cosmos/gaia/releases/download/v10.0.2/gaiad-v10.0.2-linux-amd64
+mv gaiad-v10.0.2-linux-amd64 /usr/local/bin/gaiad
+cd /usr/local/bin/
+chmod +x gaiad
+```
 
 
 ## Config app
@@ -167,28 +174,15 @@ LimitNOFILE=65535
 WantedBy=multi-user.target
 EOF
 ```
-## State-sync
+# Snapshot
+
+```bash
+wget -O cosmos_16549844.tar.lz4 https://snapshots.polkachu.com/snapshots/cosmos/cosmos_16549844.tar.lz4 --inet4-only
 
 ```
-SNAP_RPC="http://158.160.59.170:26657"
-BLOCK_HEIGHT=14500000
+```bash
+lz4 -c -d cosmos_16549844.tar.lz4  | tar -x -C $HOME/.gaia
 ```
-```
-LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
-BLOCK_HEIGHT=14500000; \
-TRUST_HASH=$(curl -s "$SNAP_RPC/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash)
-
-```
-curl -s "$SNAP_RPC/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash
-```
-sed -i.bak -E "s|^(enable[[:space:]]+=[[:space:]]+).*$|\1true| ; \
-s|^(rpc_servers[[:space:]]+=[[:space:]]+).*$|\1\"$SNAP_RPC,$SNAP_RPC\"| ; \
-s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
-s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"| ; \
-s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" $HOME/.gaia/config/config.toml
-```
-
-
 
 ## Register and start service
 
