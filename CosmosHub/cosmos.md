@@ -24,7 +24,7 @@ NODENAME=Do_not_copypaste
 ```
 ## Make your custom ports. You can chose from 10 to 65
 ```bash
-GAIA_PORT=35
+GAIA_PORT=51
 ```
 ## Save and import variables
 
