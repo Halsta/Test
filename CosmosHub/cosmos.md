@@ -81,19 +81,6 @@ gaiad config node tcp://localhost:${GAIA_PORT}657
 ```bash
 gaiad config keyring-backend file
 ```
-# Cosmovisor
-```bash
-go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@v0.1.0
-cd go/bin
-chmod +x cosmovisor && mv ./cosmovisor /usr/local/bin/cosmovisor
-```
-```bash
-mkdir -p ~/.gaia/cosmovisor/genesis/bin/ && \
-echo "{}" > ~/.gaia/cosmovisor/genesis/upgrade-info.json
-```
-```bash
-cp /usr/local/bin/gaiad $HOME/.gaia/cosmovisor/genesis/bin/gaiad
-```
 ## Init app
 
 ```bash
@@ -151,8 +138,15 @@ sed -i -e "s/prometheus = false/prometheus = true/" $HOME/.gaia/config/config.to
 ```
 ## Reset chain data
 
+old
+
 ```bash
 gaiad unsafe-reset-all --home $HOME/.gaia 
+```
+new
+
+```bash
+gaiad tendermint unsafe-reset-all --home $HOME/.gaia --keep-addr-book
 ```
 # Service
 
@@ -173,29 +167,27 @@ LimitNOFILE=65535
 WantedBy=multi-user.target
 EOF
 ```
-Cosmovisor
-```bash
-sudo tee <<EOF > /dev/null /etc/systemd/system/gaiad.service
-[Unit]
-Description=Fire-Starter
-After=network-online.target
+## State-sync
 
-[Service]
-User=$USER
-ExecStart=$(which cosmovisor) start --x-crisis-skip-assert-invariants
-Restart=on-failure
-RestartSec=3
-LimitNOFILE=infinity
-
-Environment="DAEMON_HOME=$HOME/.gaia"
-Environment="DAEMON_NAME=gaiad"
-Environment="DAEMON_ALLOW_DOWNLOAD_BINARIES=true"
-Environment="UNSAFE_SKIP_BACKUP=true"
-
-[Install]
-WantedBy=multi-user.target
-EOF
 ```
+SNAP_RPC="http://158.160.59.170:26657"
+BLOCK_HEIGHT=14500000
+```
+```
+LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
+BLOCK_HEIGHT=14500000; \
+TRUST_HASH=$(curl -s "$SNAP_RPC/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash)
+
+```
+curl -s "$SNAP_RPC/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash
+```
+sed -i.bak -E "s|^(enable[[:space:]]+=[[:space:]]+).*$|\1true| ; \
+s|^(rpc_servers[[:space:]]+=[[:space:]]+).*$|\1\"$SNAP_RPC,$SNAP_RPC\"| ; \
+s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
+s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"| ; \
+s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" $HOME/.gaia/config/config.toml
+```
+
 
 
 ## Register and start service
