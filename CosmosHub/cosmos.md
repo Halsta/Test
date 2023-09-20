@@ -265,7 +265,7 @@ gaiad tx staking create-validator \
    ```bash
   gaiad tx staking delegate $GAIA_VALOPER_ADDRESS 1000000uatom --from=$WALLET --chain-id=$GAIA_CHAIN_ID --fees 250uatom -y
   ```
-  ### Commands
+  ### Commands.
   ```bash
   sudo journalctl -fu gaiad -o cat
   ```
@@ -282,7 +282,7 @@ gaiad tx staking create-validator \
   ```bash
   
   ```
-  # Delete 
+  # Delete. 
 ```bash
 sudo systemctl stop gaiad
 sudo systemctl disable gaiad
