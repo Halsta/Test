@@ -76,7 +76,28 @@ mv gaiad-v10.0.2-linux-amd64 /usr/local/bin/gaiad
 cd /usr/local/bin/
 chmod +x gaiad
 ```
+```bash
+cd $HOME
+wget https://github.com/cosmos/gaia/releases/download/v11.0.0/gaiad-v11.0.0-linux-amd64
+mv gaiad-v11.0.0-linux-amd64 /usr/local/bin/gaiad
+cd /usr/local/bin/
+chmod +x gaiad
+```
+```bash
+cd $HOME
+wget https://github.com/cosmos/gaia/releases/download/v12.0.0-rc0/gaiad-v12.0.0-rc0-linux-amd64
+mv gaiad-v12.0.0-rc0-linux-amd64 /usr/local/bin/gaiad
+cd /usr/local/bin/
+chmod +x gaiad
+```
 
+```bash
+cd $HOME
+wget https://github.com/cosmos/gaia/releases/download/v13.0.0/gaiad-v13.0.0-linux-amd64 && \
+mv gaiad-v13.0.0-linux-amd64 /usr/local/bin/gaiad && \
+cd /usr/local/bin/ && \
+chmod +x gaiad
+```
 
 ## Config app
 
