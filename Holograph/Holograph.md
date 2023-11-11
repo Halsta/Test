@@ -15,11 +15,11 @@ sudo apt-get install nodejs -y && \
 echo -e "\nnodejs > $(node --version).\nnpm  >>> v$(npm --version).\n"
 ```
 
-### holographxyz/cli
+### holographxyz/cli.
 ```bash
 npm install -g @holographxyz/cli
 ```
-### Help Command
+### Help Command.
 ```bash
 holograph config --help
 ```
